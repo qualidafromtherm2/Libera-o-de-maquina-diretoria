@@ -1,9 +1,12 @@
+import streamlit as st
+import streamlit.components.v1 as components
+
+html_code = r"""
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Liberação de Máquina</title>
-    <!-- Importa a fonte Roboto do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       /* Reset e configurações gerais */
@@ -219,44 +222,22 @@
       }
     </style>
     <script>
-      // Variáveis e funções permanecem as mesmas do seu código original
+      // Variáveis e funções JavaScript (exemplo simplificado)
       let modeloGlobal = "";
-      let rastreabilidadeGlobal = {};
-
-      function formatNumber(value) {
-        if (typeof value === 'number') {
-          return value.toFixed(2);
-        } else if (typeof value === 'string' && !isNaN(parseFloat(value))) {
-          return parseFloat(value).toFixed(2);
-        }
-        return value;
-      }
-
       function showGlobalSpinner() {
         document.getElementById('global-spinner-overlay').style.display = 'block';
       }
       function hideGlobalSpinner() {
         document.getElementById('global-spinner-overlay').style.display = 'none';
       }
-      function processarCampo(campo) {
-        if (!campo) return campo;
-        let partes = campo.split('/');
-        let novoCampo = partes.length > 1 ? partes[partes.length - 1].trim() : partes[0].trim();
-        if (novoCampo.toUpperCase() === "2 COMPRESSORES") {
-          novoCampo = "2° COMPRESSOR";
-        }
-        return novoCampo;
-      }
-      // (Resto do seu JavaScript permanece inalterado)
       function buscarDados() {
         let opDigitada = document.getElementById('ordem').value.trim();
         if (!opDigitada) {
           alert('Digite a OP.');
           return;
         }
-        // Exemplo de chamada com spinner (se necessário)
         showGlobalSpinner();
-        // Aqui entraria a chamada para google.script.run...
+        // Simulação de busca
         setTimeout(() => { 
           hideGlobalSpinner();
           document.getElementById('valorE').innerText = "Modelo: Exemplo";
@@ -307,7 +288,6 @@
       <button id="btn-aprovado" onclick="aprovado()">Aprovado</button>
       <button id="btn-comparar" onclick="alert('Comparar')" disabled>Comparar</button>
     </div>
-    <!-- Tabela de OPs aguardando liberação -->
     <div id="tabela-rastreabilidade-container">
       <h3>OP's aguardando liberação</h3>
       <table id="tabela-rastreabilidade">
@@ -321,7 +301,6 @@
       </table>
     </div>
     <div id="resultado"></div>
-    <!-- Modal para senha -->
     <div id="modalSenha" class="modal">
       <div class="modal-content">
         <span class="close" onclick="fecharModal()">&times;</span>
@@ -333,9 +312,11 @@
         <button onclick="confirmarSenha()">Confirmar</button>
       </div>
     </div>
-    <!-- Spinner Global -->
     <div id="global-spinner-overlay">
       <div id="global-spinner"></div>
     </div>
   </body>
 </html>
+"""
+
+components.html(html_code, height=1200, scrolling=True)
