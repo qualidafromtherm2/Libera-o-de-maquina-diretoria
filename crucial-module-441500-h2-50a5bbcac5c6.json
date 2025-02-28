@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "crucial-module-441500-h2",
+  "private_key_id": "50a5bbcac5c617a6df9bb70d5e6e8fd9cdfd8b52",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC69WtNG34NyOhR\n8y7kSCuKTyGc6FGeQJo7izAmIWdEcbde4WyCEHBrxzhhr/Cl/F+2FssmobCadWpS\njLxqZOb8Uye56cSUWhZvNnEElpKQNhbQ80yFiKCL0HyWK+yy0QhJ0DdoEH1M42r2\nsN9yq66rxBjm6SfLdGlc6Cg/43CkQ3SiP7wFbW3pkTeNO9RIRuLu3cwO4ExTJRCf\nM0OSkSgqNdmeRL0ZM3cp8bfAvUhb+hVkYEkRiBK7/+vVWvqnaVD9Y56qjQAWZoMW\nq++ZaoY563MDLpV2vEYee9GwOxVQ71ZeqzljulARQQDzkHe0DQue3HFyN7BIZudR\nM1QKSYN5AgMBAAECggEAG52hxmd/tKiPDH/X1teEOu9aXzN/ztjrD02NhKxddSI4\n/FZe8U1dVcY9IUzcRqBjQOHYCzJKBF7AoEXylOKnrfDYhuEtbN5rvuyzQAK/znZ2\n41F05aqbUFuw83u0gGtZBpIvhPsejwtuotbYgrcyW2Pha8ZX3vkokRUn0NwXKOQf\nI0sG2Xt5zNj/ojJR/Yw/K2IxqRgV9GRHpXrXoReZo2LSgNgByeEgv8ri3UyjIdQD\nJfudYEgG09cPqzaMM5FhAO3XZjSTJSxV2wF0DGtZjP0WfS4ZmEvfT9zTqr9/ryky\nXT99cZjWa8Z9F4RsyFl+ZjH594MtsXHfEgMuTHjsyQKBgQDpeROcuGmYycWPcAqO\nMroIL03HLZ87UQrJKUVooxXZ4XI9lwuWtPD89MnksmU1TSrS5/05gyq55eRkoEQA\nhtQT3T48deTa/Wcf72kaXZNWyHfjlTVNMGzUV7pg45qfZRMhrdW+H7pEnPOYRI7o\nExOTovwt4Jwg3qyga2gQz8qg5QKBgQDM/2lWplm7OeAjhvyQaT36Dj1kCMhloe30\n2mTGbd57Oky+FbpemnKQZaOEMUBUJyX5JBtb7oi9gKCV4+lPF3vZigJV3i7A5Cyl\no9yAvuC4MbBlu2pTumC/8PwHTv7v12UcSJeHexqbsfKnSrM5KO8HkyTsgy2YyNJk\n8S9jV3/zBQKBgQDAEtfLqvtUs0pQwwAsFBdv/Fqkbif9iKKy870iZGjpost1V/o0\ntg88S7Z86zbQLvf4Itr0obBY14SaNC89r65x2SYGX4czkh1w7GkvQ6SfVLUtCeeb\n5SbjWnj+lMD0ORcQMg8SJs/6+pR8xIo86tTENOX6aDqJ4CdsonAuxIQS8QKBgAmJ\nhHQUjy4ntibQ++UYEFsW2IJT6kbYLsLqei/FIsmm37UkO6R1GQlgwSfARtbjb1/U\n7zTqtw/h8RaoIM2eMRPg2NT33kL5Gp6mLfcLalcHcMZ63qqAjEnBw2fvo+qyobCc\nK/iQoJ9HuxtPXWE2Z1B55wjd3XwzM56gnezIQFqlAoGAbatEu0LfPbVi2J3Xihyy\n8D9U7sEvJLt0W3ebeqpkJDCDY97jYCOoAnoJwN2DcwgKVTBOMUEWuzWTLLQ5P5Xu\nWd39MICdjCDokxNu/OEw5+Zh9gzI7S3BiXGgJ1MkJJfhoY1Zb/Rj3yaomyhGuxDb\nBwrCaLPtO6OCQQ5olopWgRI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "meus-aplicativos-fromtherm@crucial-module-441500-h2.iam.gserviceaccount.com",
+  "client_id": "106364569316822228268",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/meus-aplicativos-fromtherm%40crucial-module-441500-h2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
