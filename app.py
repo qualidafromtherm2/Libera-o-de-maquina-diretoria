@@ -327,7 +327,7 @@ html_code = r"""
 components.html(html_code, height=1200, scrolling=True)
 
 # ---------------------------
-# Backend: Carrega os dados da planilha
+# Backend: Acesso à Planilha
 # ---------------------------
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 CREDS = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
@@ -339,16 +339,18 @@ def carregar_tabela_rastreabilidade():
         sheet = client.open_by_key(SPREADSHEET_ID).worksheet("Rastreabilidade")
         dados = sheet.get_all_values()
         df = pd.DataFrame(dados[1:], columns=dados[0])
-        # Filtra onde a coluna H (oitava) está vazia (removendo espaços)
+        # Filtra registros onde a coluna H (oitava coluna) está vazia (após remover espaços)
         df_filtrado = df[df.iloc[:, 7].str.strip() == ""]
-        # Seleciona as colunas Modelo (C, índice 2) e OP (D, índice 3)
-        df_resultado = df_filtrado.iloc[:, [2, 3]]
-        df_resultado.columns = ["Modelo", "OP"]
+        # Seleciona apenas as colunas "Modelo" e "OP"
+        df_resultado = df_filtrado[["Modelo", "OP"]]
         return df_resultado
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return None
 
+# ---------------------------
+# Exibição dos Dados no Streamlit
+# ---------------------------
 st.title("Liberação de Máquina")
 st.header("OP's aguardando liberação")
 
