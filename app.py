@@ -7,6 +7,7 @@ html_code = r"""
   <head>
     <meta charset="UTF-8">
     <title>Liberação de Máquina</title>
+    <!-- Importa a fonte Roboto do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
       /* Reset e configurações gerais */
@@ -17,7 +18,7 @@ html_code = r"""
       }
       body {
         font-family: 'Roboto', Arial, sans-serif;
-        background-color: #eef2f7;
+        /* Removido o background-color para deixar o fundo padrão */
         color: #444;
         line-height: 1.6;
         padding: 30px;
