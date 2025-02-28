@@ -1,6 +1,12 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import gspread
+from google.oauth2.service_account import Credentials
+import pandas as pd
 
+# ---------------------------
+# Layout customizado via HTML
+# ---------------------------
 html_code = r"""
 <!DOCTYPE html>
 <html>
@@ -18,7 +24,6 @@ html_code = r"""
       }
       body {
         font-family: 'Roboto', Arial, sans-serif;
-        /* Removido o background-color para deixar o fundo padrão */
         color: #444;
         line-height: 1.6;
         padding: 30px;
@@ -223,8 +228,7 @@ html_code = r"""
       }
     </style>
     <script>
-      // Variáveis e funções JavaScript (exemplo simplificado)
-      let modeloGlobal = "";
+      // Funções JavaScript para interatividade (exemplo)
       function showGlobalSpinner() {
         document.getElementById('global-spinner-overlay').style.display = 'block';
       }
@@ -238,7 +242,6 @@ html_code = r"""
           return;
         }
         showGlobalSpinner();
-        // Simulação de busca
         setTimeout(() => { 
           hideGlobalSpinner();
           document.getElementById('valorE').innerText = "Modelo: Exemplo";
@@ -320,50 +323,37 @@ html_code = r"""
 </html>
 """
 
+# Exibe o layout HTML customizado
 components.html(html_code, height=1200, scrolling=True)
 
-
-
-import streamlit as st
-import gspread
-from google.oauth2.service_account import Credentials
-import pandas as pd
-
-# Configuração das credenciais e escopo
+# ---------------------------
+# Backend: Carrega os dados da planilha
+# ---------------------------
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 CREDS = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
 client = gspread.authorize(CREDS)
-
-# ID da planilha (extraído da URL)
 SPREADSHEET_ID = "1wQtlPKVhkXNzsVTYfbEaXDkW9mSBHtkO2H5RV6KFxsY"
 
 def carregar_tabela_rastreabilidade():
     try:
-        # Abrir a planilha e a aba "Rastreabilidade"
         sheet = client.open_by_key(SPREADSHEET_ID).worksheet("Rastreabilidade")
-        # Obter todos os dados (lista de listas)
         dados = sheet.get_all_values()
-        
-        # Converter para DataFrame para facilitar a manipulação
         df = pd.DataFrame(dados[1:], columns=dados[0])
-        
-        # Supondo que as colunas na planilha estão nomeadas conforme as letras:
-        # Caso não tenham nomes, podemos criar nomes temporários.
-        # Aqui, vamos assumir que a coluna C se refere a "Modelo" e a coluna D a "OP".
-        # Se os cabeçalhos não estiverem assim, você pode renomeá-los:
-        # Exemplo: df.columns = ["A", "B", "Modelo", "OP", "E", "F", "G", "H", ...]
-        # Se a coluna H for a oitava coluna (índice 7), filtramos linhas onde ela está vazia.
-        
-        # Filtrar registros onde a coluna H está vazia:
-        df_filtrado = df[df.iloc[:, 7] == ""]  # índice 7 corresponde à coluna H
-        
-        # Selecionar apenas as colunas Modelo (índice 2) e OP (índice 3)
+        # Filtra onde a coluna H (oitava) está vazia (removendo espaços)
+        df_filtrado = df[df.iloc[:, 7].str.strip() == ""]
+        # Seleciona as colunas Modelo (C, índice 2) e OP (D, índice 3)
         df_resultado = df_filtrado.iloc[:, [2, 3]]
-        # Renomear as colunas, se desejar:
         df_resultado.columns = ["Modelo", "OP"]
-        
         return df_resultado
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {e}")
         return None
 
+st.title("Liberação de Máquina")
+st.header("OP's aguardando liberação")
+
+tabela = carregar_tabela_rastreabilidade()
+if tabela is not None and not tabela.empty:
+    st.dataframe(tabela)
+else:
+    st.info("Nenhuma OP encontrada para liberação.")
