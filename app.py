@@ -321,3 +321,49 @@ html_code = r"""
 """
 
 components.html(html_code, height=1200, scrolling=True)
+
+
+
+import streamlit as st
+import gspread
+from google.oauth2.service_account import Credentials
+import pandas as pd
+
+# Configuração das credenciais e escopo
+SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+CREDS = Credentials.from_service_account_file("credentials.json", scopes=SCOPES)
+client = gspread.authorize(CREDS)
+
+# ID da planilha (extraído da URL)
+SPREADSHEET_ID = "1wQtlPKVhkXNzsVTYfbEaXDkW9mSBHtkO2H5RV6KFxsY"
+
+def carregar_tabela_rastreabilidade():
+    try:
+        # Abrir a planilha e a aba "Rastreabilidade"
+        sheet = client.open_by_key(SPREADSHEET_ID).worksheet("Rastreabilidade")
+        # Obter todos os dados (lista de listas)
+        dados = sheet.get_all_values()
+        
+        # Converter para DataFrame para facilitar a manipulação
+        df = pd.DataFrame(dados[1:], columns=dados[0])
+        
+        # Supondo que as colunas na planilha estão nomeadas conforme as letras:
+        # Caso não tenham nomes, podemos criar nomes temporários.
+        # Aqui, vamos assumir que a coluna C se refere a "Modelo" e a coluna D a "OP".
+        # Se os cabeçalhos não estiverem assim, você pode renomeá-los:
+        # Exemplo: df.columns = ["A", "B", "Modelo", "OP", "E", "F", "G", "H", ...]
+        # Se a coluna H for a oitava coluna (índice 7), filtramos linhas onde ela está vazia.
+        
+        # Filtrar registros onde a coluna H está vazia:
+        df_filtrado = df[df.iloc[:, 7] == ""]  # índice 7 corresponde à coluna H
+        
+        # Selecionar apenas as colunas Modelo (índice 2) e OP (índice 3)
+        df_resultado = df_filtrado.iloc[:, [2, 3]]
+        # Renomear as colunas, se desejar:
+        df_resultado.columns = ["Modelo", "OP"]
+        
+        return df_resultado
+    except Exception as e:
+        st.error(f"Erro ao carregar os dados: {e}")
+        return None
+
